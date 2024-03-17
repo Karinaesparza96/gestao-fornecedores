@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace Dev.Business.Interfaces
 {
-    public interface IRepository<TEntity> where TEntity : Entity, new()
+    public interface IRepository<TEntity> : IDisposable where TEntity : Entity
     {
         Task Adicionar(TEntity entity);
 
