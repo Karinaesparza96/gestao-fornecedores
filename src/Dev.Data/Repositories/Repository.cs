@@ -42,7 +42,7 @@ namespace Dev.Data.Repositories
             await SaveChanges();
         }
 
-        public virtual async Task Excluir(Guid id)
+        public virtual async Task Remover(Guid id)
         {
            DbSet.Remove(new TEntity { Id = id });
            await SaveChanges();

@@ -13,7 +13,7 @@ namespace Dev.Business.Interfaces
 
         Task<IEnumerable<TEntity>> Buscar(Expression<Func<TEntity, bool>> expression);
 
-        Task Excluir(Guid id);
+        Task Remover(Guid id);
 
         Task Atualizar(TEntity entity);
 

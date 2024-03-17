@@ -1,8 +1,6 @@
 ﻿using Dev.Business.Models;
 using Dev.Data.Context.Configurations;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.Diagnostics;
 using System.Linq.Expressions;
 
 namespace Dev.Data.Context
@@ -18,7 +16,7 @@ namespace Dev.Data.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            Debugger.Launch();
+            //Debugger.Launch();
             modelBuilder.SetStringColumnType();
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(MeuDbContext).Assembly);
@@ -41,8 +39,6 @@ namespace Dev.Data.Context
                     modelBuilder.Entity(entity.ClrType).HasQueryFilter(lambda);
                 }
             }
-
-           
 
             base.OnModelCreating(modelBuilder);
         }

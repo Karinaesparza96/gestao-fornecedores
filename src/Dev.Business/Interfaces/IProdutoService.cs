@@ -4,9 +4,9 @@ namespace Dev.Business.Interfaces
 {
     public interface IProdutoService : IDisposable
     {
-        Task Adionar(Produto produto);
+        Task Adicionar(Produto produto);
 
-        Task Atulizar(Produto produto);
+        Task Atualizar(Produto produto);
 
         Task Remover(Guid id);
     }

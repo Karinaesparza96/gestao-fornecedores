@@ -36,7 +36,7 @@ namespace Dev.Data.Repositories
 
         public async Task RemoverEnderecoFornecedor(Endereco endereco)
         {   
-           await _enderecoRepository.Excluir(endereco.Id);
+           await _enderecoRepository.Remover(endereco.Id);
         }
     }
 }
