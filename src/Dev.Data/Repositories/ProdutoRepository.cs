@@ -1,6 +1,7 @@
 ﻿using Dev.Business.Interfaces;
 using Dev.Business.Models;
 using Dev.Data.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace Dev.Data.Repositories
 {
@@ -10,19 +11,24 @@ namespace Dev.Data.Repositories
         {
         }
 
-        public Task<Produto> ObterProdutoFornecedor(Guid id)
+        public async Task<Produto> ObterProdutoFornecedor(Guid id)
         {
-            throw new NotImplementedException();
+            return await DbSet.AsNoTracking()
+                .Include(p => p.Fornecedor)
+                .FirstAsync(p => p.Id == id);
         }
 
-        public Task<IEnumerable<Produto>> ObterProdutosFornecedores()
+        public async Task<IEnumerable<Produto>> ObterProdutosFornecedores()
         {
-            throw new NotImplementedException();
+            return await DbSet.AsNoTracking()
+                .Include(p => p.Fornecedor)
+                .OrderBy(p => p.Nome)
+                .ToListAsync();
         }
 
-        public Task<IEnumerable<Produto>> ObterProdutosPorFornecedor(Guid fornecedorId)
+        public async Task<IEnumerable<Produto>> ObterProdutosPorFornecedor(Guid fornecedorId)
         {
-            throw new NotImplementedException();
+            return await Buscar(p => p.FornecedorId == fornecedorId);   
         }
     }
 }
