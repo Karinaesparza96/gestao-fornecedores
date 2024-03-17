@@ -7,6 +7,7 @@ namespace Dev.Business.Models
 
         public bool Excluido {  get; set; }
 
+        public DateTime DataCadastro { get; set; }
         protected Entity()
         {
             Id = Guid.NewGuid();
