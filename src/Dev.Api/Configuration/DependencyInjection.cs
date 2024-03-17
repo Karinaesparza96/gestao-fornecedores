@@ -1,4 +1,5 @@
 ﻿using Dev.Business.Interfaces;
+using Dev.Business.Noficacoes;
 using Dev.Data.Context;
 using Dev.Data.Repositories;
 
@@ -13,6 +14,7 @@ namespace Dev.Api.Configuration
             services.AddScoped<IFornecedorRepository, FornecedorRepository>();
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
             services.AddScoped<IEnderecoRepository, EnderecoRepository>();
+            services.AddScoped<INotificador, Notificador>();
 
             return services;
         }
