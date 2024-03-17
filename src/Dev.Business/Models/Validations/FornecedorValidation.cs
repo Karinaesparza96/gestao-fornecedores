@@ -1,9 +1,5 @@
-﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Dev.Business.Models.Validations.Documentos;
+using FluentValidation;
 
 namespace Dev.Business.Models.Validation
 {
@@ -13,16 +9,24 @@ namespace Dev.Business.Models.Validation
         {
             RuleFor(f => f.Nome)
                 .NotEmpty()
-                .WithMessage("O campo {PropertyName} precisa ser fornecido.");
+                .WithMessage("O campo {PropertyName} precisa ser fornecido.")
+                .Length(2,100)
+                .WithMessage("O campo {PropertyName} precisa ter entre {MinLength} e {MaxLength} caracteres.");
 
             When(f => f.TipoFornecedor == TipoFornecedor.PessoaFisica, () =>
             {
-                RuleFor(f => f.Documento).Length(11);
+                RuleFor(c => c.Documento.Length).Equal(CpfValidacao.TamanhoCpf)
+                    .WithMessage("O campo Documento precisa ter {ComparisonValue} e for fornecido {PropertyValue}.");
+
+                RuleFor(c => CpfValidacao.Validar(c.Documento)).Equal(true)
+                    .WithMessage("O documento fornecido é inválido.");
+
             });
 
             When(f => f.TipoFornecedor == TipoFornecedor.PessoaJuridica, () =>
             {
-                RuleFor(f => f.Documento).Length(14);
+                RuleFor(c => c.Documento.Length).Equal(CnpjValidacao.TamanhoCnpj)
+                    .WithMessage("O campo Documento precisa ter {ComparisonValue} e for fornecido {PropertyValue}.");
             });
         }
     }
