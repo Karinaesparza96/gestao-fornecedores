@@ -22,10 +22,8 @@ namespace Dev.Data.Mapping
 
             // 1 : 1 => Fornecedor : Endereço
 
-            builder
-                .HasOne(f => f.Endereco)
-                .WithOne(e => e.Fornecedor)
-                .HasForeignKey("FornecedorId");
+            builder.HasOne(f => f.Endereco)
+                  .WithOne(e => e.Fornecedor);
 
             // 1 : N => Fornecedor : Produtos
 

@@ -1,6 +1,9 @@
 ﻿using Dev.Business.Models;
 using Dev.Data.Context.Configurations;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Diagnostics;
+using System.Linq.Expressions;
 
 namespace Dev.Data.Context
 {
@@ -15,7 +18,7 @@ namespace Dev.Data.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            Debugger.Launch();
             modelBuilder.SetStringColumnType();
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(MeuDbContext).Assembly);
@@ -26,7 +29,20 @@ namespace Dev.Data.Context
                 relationship.DeleteBehavior = DeleteBehavior.ClientSetNull;
             }
 
-            modelBuilder.AplicarFiltroSoftDelete<Entity>();
+            foreach(var entity in modelBuilder.Model.GetEntityTypes())
+            {
+                if (typeof(Entity).IsAssignableFrom(entity.ClrType))
+                {
+                    var parameter = Expression.Parameter(entity.ClrType, "e");
+                    var property = Expression.Property(parameter, "Excluido");
+                    var condition = Expression.Not(property);
+                    var lambda = Expression.Lambda(condition, parameter);
+
+                    modelBuilder.Entity(entity.ClrType).HasQueryFilter(lambda);
+                }
+            }
+
+           
 
             base.OnModelCreating(modelBuilder);
         }
