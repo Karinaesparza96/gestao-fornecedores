@@ -53,6 +53,30 @@ namespace Dev.Api.Controllers
            return CustomResponse(HttpStatusCode.Created, fornecedorViewModel);
         }
 
+        [HttpPut("{id:guid}")]
+        public async Task<IActionResult> Atualizar(Guid id, FornecedorViewModel fornecedorViewModel)
+        {   
+            if(id != fornecedorViewModel.Id)
+            {
+                NotificarErro("O Id informado não é o mesmo que foi passado na query.");
+                CustomResponse();
+            }
+            if (!ModelState.IsValid)  return CustomResponse(ModelState);
+
+            await _fornecedorService.Atualizar(_mapper.Map<Fornecedor>(fornecedorViewModel));
+
+            return CustomResponse(HttpStatusCode.NoContent);
+        }
+
+        [HttpDelete("{id:guid}")]
+        public async Task<IActionResult> Remover(Guid id)
+        {
+           await _fornecedorService.Remover(id);
+
+            return CustomResponse(HttpStatusCode.NoContent);
+        }
+
+
         private async Task<FornecedorViewModel> ObterFornecedorProdutosEndereco(Guid id)
         {
            return _mapper.Map<FornecedorViewModel>(await _fornecedorRepository.ObterFornecedorProdutosEndereco(id));
