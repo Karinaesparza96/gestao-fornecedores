@@ -7,7 +7,9 @@ namespace Dev.Business.Services
     public class ProdutoService : BaseService, IProdutoService
     {   
         private readonly IProdutoRepository _produtoRepository;
-        public ProdutoService(INotificador notificador, IProdutoRepository produtoRepository) : base(notificador)
+        public ProdutoService(INotificador notificador, 
+                              IProdutoRepository produtoRepository) 
+                            : base(notificador)
         {
             _produtoRepository = produtoRepository;
         }
@@ -16,7 +18,7 @@ namespace Dev.Business.Services
         {
             if (!ExecutarValidacao(new ProdutoValidation(), produto)) return;
 
-            var produtoExistente = _produtoRepository.ObterPorId(produto.Id);
+            var produtoExistente = await _produtoRepository.ObterPorId(produto.Id);
 
             if(produtoExistente != null)
             {

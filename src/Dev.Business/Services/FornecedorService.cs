@@ -19,7 +19,9 @@ namespace Dev.Business.Services
             if (!ExecutarValidacao(new FornecedorValidation(), fornecedor) || 
                 !ExecutarValidacao(new EnderecoValidation(), fornecedor.Endereco)) return;
 
-            if(_fornecedorRepository.Buscar(f => f.Documento == fornecedor.Documento).Result.Any())
+            var fornecedores = await _fornecedorRepository.Buscar(f => f.Documento == fornecedor.Documento);
+
+            if (fornecedores.Any())
             {
                 Notificar("Já existe um fornecedor com este documento informado.");
 
@@ -34,7 +36,9 @@ namespace Dev.Business.Services
         {
             if (!ExecutarValidacao(new FornecedorValidation(), fornecedor)) return;
 
-            if(_fornecedorRepository.Buscar(f => f.Documento == fornecedor.Documento && f.Id != fornecedor.Id).Result.Any()){
+            var fornecedores = await _fornecedorRepository.Buscar(f => f.Documento == fornecedor.Documento && f.Id != fornecedor.Id);
+
+            if (fornecedores.Any()){
 
                 Notificar("Já existe um fornecedor com este documento informado.");
                 return;

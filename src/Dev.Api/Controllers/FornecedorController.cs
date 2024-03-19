@@ -61,7 +61,7 @@ namespace Dev.Api.Controllers
                 NotificarErro("O Id informado não é o mesmo que foi passado na query.");
                 CustomResponse();
             }
-            if (!ModelState.IsValid)  return CustomResponse(ModelState);
+            if (!ModelState.IsValid) return CustomResponse(ModelState);
 
             await _fornecedorService.Atualizar(_mapper.Map<Fornecedor>(fornecedorViewModel));
 
