@@ -9,7 +9,8 @@ namespace Dev.Business.Services
     {   
         private readonly IFornecedorRepository _fornecedorRepository;
         public FornecedorService(INotificador notificador, 
-            IFornecedorRepository fornecedorRepository) : base(notificador)
+                                IFornecedorRepository fornecedorRepository, 
+                                IUnitOfWork unitOfWork) : base(notificador, unitOfWork)
         {
             _fornecedorRepository = fornecedorRepository;
         }
@@ -28,7 +29,8 @@ namespace Dev.Business.Services
                 return;
             }
 
-           await _fornecedorRepository.Adicionar(fornecedor);
+            _fornecedorRepository.Adicionar(fornecedor);
+            await Commit();
            
         }
 
@@ -44,7 +46,8 @@ namespace Dev.Business.Services
                 return;
             }
 
-            await _fornecedorRepository.Atualizar(fornecedor);
+             _fornecedorRepository.Atualizar(fornecedor);
+            await Commit();
         }
 
         public async Task Remover(Guid id)
@@ -67,10 +70,12 @@ namespace Dev.Business.Services
 
             if(endereco != null)
             {
-               await _fornecedorRepository.RemoverEnderecoFornecedor(endereco);
+               _fornecedorRepository.RemoverEnderecoFornecedor(endereco);
             }
 
-            await _fornecedorRepository.Remover(id);
+            _fornecedorRepository.Remover(id);
+
+            await Commit();
         }
         public void Dispose()
         {

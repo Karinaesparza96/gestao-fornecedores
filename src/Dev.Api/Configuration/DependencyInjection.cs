@@ -3,6 +3,7 @@ using Dev.Business.Noficacoes;
 using Dev.Business.Services;
 using Dev.Data.Context;
 using Dev.Data.Repositories;
+using Dev.Data.UoW;
 
 namespace Dev.Api.Configuration
 {
@@ -12,6 +13,7 @@ namespace Dev.Api.Configuration
         {   
             // Data
             services.AddScoped<MeuDbContext>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IFornecedorRepository, FornecedorRepository>();
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
             services.AddScoped<IEnderecoRepository, EnderecoRepository>();

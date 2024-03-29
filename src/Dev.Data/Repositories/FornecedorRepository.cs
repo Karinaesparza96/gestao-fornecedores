@@ -26,6 +26,15 @@ namespace Dev.Data.Repositories
                 .FirstAsync(f => f.Id == id);
         }
 
+        public async Task<IEnumerable<Fornecedor>> ObterFornecedoresProdutosEndereco()
+        {
+           return await DbSet.AsNoTracking()
+                .Include(f => f.Endereco)
+                .Include(f => f.Produtos)
+                .ToListAsync();
+                    
+        }
+
         public async Task<Fornecedor> ObterFornecedorProdutosEndereco(Guid id)
         {
             return await DbSet.AsNoTracking()
@@ -34,9 +43,9 @@ namespace Dev.Data.Repositories
                 .FirstAsync(f => f.Id == id);
         }
 
-        public async Task RemoverEnderecoFornecedor(Endereco endereco)
+        public void RemoverEnderecoFornecedor(Endereco endereco)
         {   
-           await _enderecoRepository.Remover(endereco.Id);
+            _enderecoRepository.Remover(endereco.Id);
         }
     }
 }

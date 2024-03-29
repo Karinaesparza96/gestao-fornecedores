@@ -8,8 +8,9 @@ namespace Dev.Business.Services
     {   
         private readonly IProdutoRepository _produtoRepository;
         public ProdutoService(INotificador notificador, 
-                              IProdutoRepository produtoRepository) 
-                            : base(notificador)
+                              IProdutoRepository produtoRepository,
+                              IUnitOfWork unitOfWork) 
+                            : base(notificador, unitOfWork)
         {
             _produtoRepository = produtoRepository;
         }
@@ -26,7 +27,8 @@ namespace Dev.Business.Services
                 return;
             }
 
-            await _produtoRepository.Adicionar(produto);
+            _produtoRepository.Adicionar(produto);
+            await Commit();
 
         }
 
@@ -34,7 +36,14 @@ namespace Dev.Business.Services
         {
             if (!ExecutarValidacao(new ProdutoValidation(), produto)) return;
 
-            await _produtoRepository.Atualizar(produto);
+             _produtoRepository.Atualizar(produto);
+            await Commit();
+        }
+
+        public async Task Remover(Guid id)
+        {
+            _produtoRepository.Remover(id);
+            await Commit();
         }
 
         public void Dispose()
@@ -42,9 +51,6 @@ namespace Dev.Business.Services
             _produtoRepository?.Dispose();
         }
 
-        public async Task Remover(Guid id)
-        {
-            await _produtoRepository.Remover(id);
-        }
+       
     }
 }

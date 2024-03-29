@@ -10,7 +10,7 @@ namespace Dev.Data.Repositories
     {   
         private readonly MeuDbContext _context;
         protected DbSet<TEntity> DbSet { get; set; }
-        protected Repository(MeuDbContext context) 
+        protected Repository(MeuDbContext context)
         { 
             _context = context;
             DbSet = _context.Set<TEntity>();
@@ -30,22 +30,19 @@ namespace Dev.Data.Repositories
         {
             return await DbSet.AsNoTracking().Where(expression).ToListAsync();
         }
-        public virtual async Task Adicionar(TEntity entity)
+        public virtual void Adicionar(TEntity entity)
         {
              DbSet.Add(entity);
-             await SaveChanges();
         }
 
-        public virtual async Task Atualizar(TEntity entity)
+        public virtual void Atualizar(TEntity entity)
         {
             DbSet.Update(entity);
-            await SaveChanges();
         }
 
-        public virtual async Task Remover(Guid id)
+        public virtual void  Remover(Guid id)
         {
            DbSet.Remove(new TEntity { Id = id });
-           await SaveChanges();
         }
 
         public async Task<int> SaveChanges()

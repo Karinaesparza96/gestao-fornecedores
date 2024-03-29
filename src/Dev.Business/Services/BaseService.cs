@@ -8,10 +8,12 @@ namespace Dev.Business.Services
 {
     public abstract class BaseService
     {   
+        private readonly IUnitOfWork _unitOfWork;
         private readonly INotificador _notificador;
-        protected BaseService(INotificador notificador) 
+        protected BaseService(INotificador notificador, IUnitOfWork unitOfWork) 
         {
             _notificador = notificador;
+            _unitOfWork = unitOfWork;
         }
 
         protected void Notificar(string mensagem)
@@ -39,6 +41,14 @@ namespace Dev.Business.Services
 
             return false;
             
+        }
+
+        protected async Task<bool> Commit()
+        {
+            if(await _unitOfWork.Commit()) return true;
+
+            Notificar("Não possivel realizar a operação no banco.");
+            return false;
         }
 
     }
