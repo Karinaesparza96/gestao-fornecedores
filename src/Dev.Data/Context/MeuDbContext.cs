@@ -23,21 +23,7 @@ namespace Dev.Data.Context
 
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(x => x.GetForeignKeys()))
             {
-                // Impede o comportamento de deletar em cascata
                 relationship.DeleteBehavior = DeleteBehavior.ClientSetNull;
-            }
-
-            foreach(var entity in modelBuilder.Model.GetEntityTypes())
-            {
-                if (typeof(Entity).IsAssignableFrom(entity.ClrType))
-                {
-                    var parameter = Expression.Parameter(entity.ClrType, "e");
-                    var property = Expression.Property(parameter, "Excluido");
-                    var condition = Expression.Not(property);
-                    var lambda = Expression.Lambda(condition, parameter);
-
-                    modelBuilder.Entity(entity.ClrType).HasQueryFilter(lambda);
-                }
             }
 
             base.OnModelCreating(modelBuilder);
@@ -57,11 +43,7 @@ namespace Dev.Data.Context
                     entry.Property("DataCadastro").IsModified = false;
                 }
 
-                if(entry.State == EntityState.Deleted)
-                {
-                    entry.Property("Excluido").CurrentValue = true;
-                    entry.State = EntityState.Modified;
-                }
+        
             }
             return base.SaveChangesAsync(cancellationToken);
         }

@@ -10,15 +10,13 @@ namespace Dev.Api.Configuration
         public AutoMapperConfiguration()
         {
             CreateMap<Fornecedor, FornecedorViewModel>();
-            CreateMap<FornecedorViewModel, Fornecedor>()
-                .ForMember( dest => dest.Id, src => src.Ignore());
+            CreateMap<FornecedorViewModel, Fornecedor>();
 
             CreateMap<Endereco, EnderecoViewModel>();
-            CreateMap<EnderecoViewModel, Endereco>()
-                .ForMember(dest => dest.Id, src => src.Ignore());
+            CreateMap<EnderecoViewModel, Endereco>();
 
-            CreateMap<ProdutoViewModel, Produto>()
-                .ForMember(dest => dest.Id, src => src.Ignore());
+
+            CreateMap<ProdutoViewModel, Produto>();
             CreateMap<Produto, ProdutoViewModel>()
                 .ForMember(dest => dest.NomeFornecedor, opt => opt.MapFrom(src => src.Fornecedor.Nome));
 
