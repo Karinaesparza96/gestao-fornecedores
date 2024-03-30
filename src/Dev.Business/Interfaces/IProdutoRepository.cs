@@ -7,5 +7,6 @@ namespace Dev.Business.Interfaces
         Task<Produto> ObterProdutoFornecedor(Guid id);
         Task<IEnumerable<Produto>> ObterProdutosFornecedores();
         Task<IEnumerable<Produto>> ObterProdutosPorFornecedor(Guid fornecedorId);
+        Task<PaginateList<Produto>> ObterTodos(int pagIndex, int pagSize, string query);
     }
 }

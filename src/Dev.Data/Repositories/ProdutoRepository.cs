@@ -30,5 +30,27 @@ namespace Dev.Data.Repositories
         {
             return await Buscar(p => p.FornecedorId == fornecedorId);   
         }
+
+        public async Task<PaginateList<Produto>> ObterTodos(int pagIndex, int pagSize, string query = null)
+        {
+            var queryable = DbSet.Where(p => p.Nome.Contains(query)).AsNoTracking();
+
+            int totalRegistros = await queryable.CountAsync();
+
+            var produtos = await DbSet
+                .Skip(pagSize * (pagIndex - 1))
+                .Take(pagSize)
+                .Where(p => p.Nome.Contains(query))
+                .ToListAsync();
+
+            return new PaginateList<Produto>()
+            {
+                List = produtos,
+                TotalResults = totalRegistros,
+                PageIndex = pagIndex,
+                PageSize = pagSize,
+                Query = query
+            };
+        }
     }
 }

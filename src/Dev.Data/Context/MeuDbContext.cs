@@ -1,11 +1,11 @@
 ﻿using Dev.Business.Models;
 using Dev.Data.Context.Configurations;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
 
 namespace Dev.Data.Context
 {
-    public class MeuDbContext : DbContext
+    public class MeuDbContext : IdentityDbContext
     {
         public MeuDbContext(DbContextOptions<MeuDbContext> db) : base(db)
         {

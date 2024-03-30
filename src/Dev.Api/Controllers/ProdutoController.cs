@@ -13,10 +13,10 @@ namespace Dev.Api.Controllers
         private readonly IProdutoService _produtoService;
         private readonly IProdutoRepository _produtoRepository;
         private readonly IMapper _mapper;
-        public ProdutoController(INotificador notificador, 
-                                 IProdutoService produtoService, 
+        public ProdutoController(INotificador notificador,
+                                 IProdutoService produtoService,
                                  IProdutoRepository produtoRepository,
-                                 IMapper mapper) 
+                                 IMapper mapper)
                                 : base(notificador)
         {
             _produtoService = produtoService;
@@ -24,10 +24,10 @@ namespace Dev.Api.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
-        public async Task<IEnumerable<ProdutoViewModel>> ObterTodos()
+        [HttpGet()]
+        public async Task<IEnumerable<ProdutoViewModel>> ObterTodos(int pagIndex, int pagSize, string query = null)
         {
-            return _mapper.Map<IEnumerable<ProdutoViewModel>>(await _produtoRepository.ObterTodos());
+            return _mapper.Map<IEnumerable<ProdutoViewModel>>(await _produtoRepository.ObterTodos(pagIndex, pagSize, query));
         }
 
         [HttpGet("{id:guid}")]

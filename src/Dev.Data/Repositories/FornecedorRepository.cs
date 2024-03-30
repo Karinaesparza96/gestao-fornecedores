@@ -28,18 +28,20 @@ namespace Dev.Data.Repositories
 
         public async Task<IEnumerable<Fornecedor>> ObterFornecedoresProdutosEndereco()
         {
-           return await DbSet.AsNoTracking()
-                .Include(f => f.Endereco)
-                .Include(f => f.Produtos)
-                .ToListAsync();
+            return await DbSet.AsNoTracking()
+                 .Include(f => f.Endereco)
+                 .Include(f => f.Produtos)
+                 .OrderBy(f => f.Nome)
+                 .ToListAsync();
                     
         }
 
         public async Task<Fornecedor> ObterFornecedorProdutosEndereco(Guid id)
         {
             return await DbSet.AsNoTracking()
-                .Include(f => f.Produtos)
                 .Include(f => f.Endereco)
+                .Include(f => f.Produtos)
+                .OrderBy(f => f.Nome)
                 .FirstAsync(f => f.Id == id);
         }
 
