@@ -47,8 +47,8 @@ namespace Dev.Api.Controllers
             }
 
             await _signInManager.SignInAsync(user, isPersistent: false);
-            var token = GerarJwt();
-            return CustomResponse(HttpStatusCode.Created, token);
+         
+            return CustomResponse(HttpStatusCode.Created, GerarJwt());
         }
 
         [HttpPost("login")]
@@ -67,7 +67,7 @@ namespace Dev.Api.Controllers
             return CustomResponse(HttpStatusCode.OK, GerarJwt());
         }
 
-        private string GerarJwt()
+        private AuthResponse GerarJwt()
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_jwtSettings.Segredo);
@@ -82,7 +82,7 @@ namespace Dev.Api.Controllers
 
             var encodedToken = tokenHandler.WriteToken(token);
 
-            return encodedToken;
+            return new AuthResponse { Token = encodedToken };
         }
     }
 }
