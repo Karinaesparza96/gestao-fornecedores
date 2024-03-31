@@ -22,27 +22,27 @@ namespace Dev.Data.Repositories
         public async Task<Fornecedor> ObterFornecedorEndereco(Guid id)
         {
            return await DbSet.AsNoTracking()
-                .Include(f => f.Endereco)
-                .FirstAsync(f => f.Id == id);
+                            .Include(f => f.Endereco)
+                            .FirstAsync(f => f.Id == id);
         }
 
         public async Task<IEnumerable<Fornecedor>> ObterFornecedoresProdutosEndereco()
         {
             return await DbSet.AsNoTracking()
-                 .Include(f => f.Endereco)
-                 .Include(f => f.Produtos)
-                 .OrderBy(f => f.Nome)
-                 .ToListAsync();
+                             .Include(f => f.Endereco)
+                             .Include(f => f.Produtos)
+                             .OrderBy(f => f.Nome)
+                             .ToListAsync();
                     
         }
 
         public async Task<Fornecedor> ObterFornecedorProdutosEndereco(Guid id)
         {
             return await DbSet.AsNoTracking()
-                .Include(f => f.Endereco)
-                .Include(f => f.Produtos)
-                .OrderBy(f => f.Nome)
-                .FirstAsync(f => f.Id == id);
+                            .Include(f => f.Endereco)
+                            .Include(f => f.Produtos)
+                            .OrderBy(f => f.Nome)
+                            .FirstAsync(f => f.Id == id);
         }
 
         public void RemoverEnderecoFornecedor(Endereco endereco)
