@@ -31,29 +31,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<MeuDbContext>();
 
-var JwtSettingsSection = builder.Configuration.GetSection("JwtSettings");
-builder.Services.Configure<JwtSettings>(JwtSettingsSection);
-
-var jwtSettings = JwtSettingsSection.Get<JwtSettings>();
-var key = Encoding.ASCII.GetBytes(jwtSettings.Segredo);
-
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(options =>
-{
-    options.RequireHttpsMetadata = true;
-    options.SaveToken = true;
-    options.TokenValidationParameters = new TokenValidationParameters
-    {
-        IssuerSigningKey = new SymmetricSecurityKey(key),
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidAudience = jwtSettings.Audiencia,
-        ValidIssuer = jwtSettings.Emissor
-    };
-});
+builder.AddJwtConfiguration();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperConfiguration));
 
