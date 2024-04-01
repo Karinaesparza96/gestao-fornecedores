@@ -27,7 +27,7 @@ namespace Dev.Api.Controllers
         [HttpGet()]
         public async Task<IEnumerable<ProdutoViewModel>> ObterTodos(int pagIndex, int pagSize, string query = null)
         {
-            return _mapper.Map<IEnumerable<ProdutoViewModel>>(await _produtoRepository.ObterTodos(pagIndex, pagSize, query));
+            return _mapper.Map<IEnumerable<ProdutoViewModel>>(await _produtoRepository.ObterTodosPaginado(pagIndex, pagSize, query));
         }
 
         [HttpGet("{id:guid}")]

@@ -31,7 +31,7 @@ namespace Dev.Data.Repositories
             return await Buscar(p => p.FornecedorId == fornecedorId);   
         }
 
-        public async Task<PaginateList<Produto>> ObterTodos(int pagIndex, int pagSize, string query = null)
+        public async Task<PaginateList<Produto>> ObterTodosPaginado(int pagIndex, int pagSize, string query = null)
         {
             var queryable = DbSet.Where(p => p.Nome.Contains(query)).AsNoTracking();
 

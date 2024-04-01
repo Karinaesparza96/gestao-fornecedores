@@ -17,9 +17,9 @@ namespace Dev.Api.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly JwtSettings _jwtSettings;
         public AuthController(INotificador notificador, 
-                SignInManager<IdentityUser> signInManager,
-                UserManager<IdentityUser> userManager, 
-                IOptions<JwtSettings> jwtSettings) : base(notificador)
+                        SignInManager<IdentityUser> signInManager,
+                        UserManager<IdentityUser> userManager, 
+                        IOptions<JwtSettings> jwtSettings) : base(notificador)
         {   
             _signInManager = signInManager;
             _userManager = userManager;
@@ -45,10 +45,8 @@ namespace Dev.Api.Controllers
                 NotificarErro("Falha ao registrar o usuário");
                 return CustomResponse();
             }
-
-            await _signInManager.SignInAsync(user, isPersistent: false);
          
-            return CustomResponse(HttpStatusCode.Created, GerarJwt());
+            return CustomResponse(HttpStatusCode.OK, new AuthResponse { Token = GerarJwt() });
         }
 
         [HttpPost("login")]
@@ -64,10 +62,18 @@ namespace Dev.Api.Controllers
                 return CustomResponse();
             }
 
-            return CustomResponse(HttpStatusCode.OK, GerarJwt());
+            return CustomResponse(HttpStatusCode.OK, new AuthResponse { Token = GerarJwt() });
         }
 
-        private AuthResponse GerarJwt()
+        [HttpPost("logout")] 
+        public async Task<ActionResult> Logout()
+        {
+             await _signInManager.SignOutAsync();
+
+            return CustomResponse();
+        }
+
+        private string GerarJwt()
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_jwtSettings.Segredo);
@@ -82,7 +88,7 @@ namespace Dev.Api.Controllers
 
             var encodedToken = tokenHandler.WriteToken(token);
 
-            return new AuthResponse { Token = encodedToken };
+            return encodedToken;
         }
     }
 }
