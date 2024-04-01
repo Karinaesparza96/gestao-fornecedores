@@ -2,11 +2,13 @@
 using Dev.Api.DTOs;
 using Dev.Business.Interfaces;
 using Dev.Business.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
 namespace Dev.Api.Controllers
 {
+    [Authorize]
     [Route("api/fornecedores")]
     public class FornecedorController : MainController
     {   
@@ -23,6 +25,7 @@ namespace Dev.Api.Controllers
             _mapper = mapper;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IEnumerable<FornecedorViewModel>> ObterTodos()
         {
@@ -31,6 +34,7 @@ namespace Dev.Api.Controllers
          
         }
 
+        [AllowAnonymous]
         [HttpGet("{id:guid}")]
 
         public async Task<ActionResult<FornecedorViewModel>> ObterPorId(Guid id)
