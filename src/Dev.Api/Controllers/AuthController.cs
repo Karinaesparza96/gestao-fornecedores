@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net;
+using System.Security.Claims;
 using System.Text;
 
 namespace Dev.Api.Controllers
@@ -46,7 +47,7 @@ namespace Dev.Api.Controllers
                 return CustomResponse();
             }
          
-            return CustomResponse(HttpStatusCode.OK, new AuthResponse { Token = GerarJwt() });
+            return CustomResponse(HttpStatusCode.OK, new AuthResponse { Token = await GerarJwt(user.Email) });
         }
 
         [HttpPost("login")]
@@ -62,7 +63,7 @@ namespace Dev.Api.Controllers
                 return CustomResponse();
             }
 
-            return CustomResponse(HttpStatusCode.OK, new AuthResponse { Token = GerarJwt() });
+            return CustomResponse(HttpStatusCode.OK, new AuthResponse { Token = await GerarJwt(loginUser.Email) });
         }
 
         [HttpPost("logout")] 
@@ -73,13 +74,27 @@ namespace Dev.Api.Controllers
             return CustomResponse();
         }
 
-        private string GerarJwt()
-        {
+        private async Task<string> GerarJwt(string email)
+        {   
+            var user = await _userManager.FindByEmailAsync(email);
+            var roles = await _userManager.GetRolesAsync(user);
+
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, user.UserName)
+            };
+
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
+
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_jwtSettings.Segredo);
 
             var token = tokenHandler.CreateToken(new SecurityTokenDescriptor
-            {
+            {   
+                Subject = new ClaimsIdentity(claims),
                 Issuer = _jwtSettings.Emissor,
                 Audience = _jwtSettings.Audiencia,
                 Expires = DateTime.UtcNow.AddHours(_jwtSettings.ExpiracaoHoras),

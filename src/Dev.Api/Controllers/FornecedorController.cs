@@ -74,6 +74,7 @@ namespace Dev.Api.Controllers
             return CustomResponse(HttpStatusCode.NoContent);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id:guid}")]
         public async Task<IActionResult> Remover(Guid id)
         {
