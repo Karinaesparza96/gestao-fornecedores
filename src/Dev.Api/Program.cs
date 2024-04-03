@@ -3,11 +3,10 @@ using Dev.Data.Context;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using System.Security.Cryptography.Xml;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddControllers()
                 .ConfigureApiBehaviorOptions(options =>

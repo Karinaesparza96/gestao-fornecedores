@@ -1,6 +1,7 @@
 ﻿using Dev.Business.Models.Base;
 using Microsoft.IdentityModel.JsonWebTokens;
 using System.Security.Claims;
+using IdentityModel;
 
 namespace Dev.Api.Extensions.IdentityUser
 {
@@ -28,7 +29,22 @@ namespace Dev.Api.Extensions.IdentityUser
 
         public string GetUserName()
         {
-            throw new NotImplementedException();
+            var username = _accessor.HttpContext?.User.FindFirst("username")?.Value;
+            if(!string.IsNullOrEmpty(username)) return username;
+
+            username = _accessor.HttpContext?.User.Identity?.Name;
+            if(!string.IsNullOrEmpty(username)) return username;
+
+            username = _accessor.HttpContext?.User.FindFirst(JwtClaimTypes.Name)?.Value;
+            if (!string.IsNullOrEmpty(username)) return username;
+
+            username = _accessor.HttpContext?.User.FindFirst(JwtClaimTypes.GivenName)?.Value;
+            if (!string.IsNullOrEmpty(username)) return username;
+
+            var sub = _accessor.HttpContext?.User.FindFirst(JwtClaimTypes.Subject);
+            if (sub != null) return sub.Value;
+
+            return string.Empty;
         }
 
         public bool IsAuthenticated()
@@ -38,16 +54,16 @@ namespace Dev.Api.Extensions.IdentityUser
 
         public bool IsInRole(string role)
         {
-            throw new NotImplementedException();
+            return _accessor.HttpContext != null && _accessor.HttpContext.User.IsInRole(role);
         }
-        public string GetLocalIpAddress()
+        public string? GetLocalIpAddress()
         {
-            throw new NotImplementedException();
+            return _accessor.HttpContext?.Connection.LocalIpAddress?.ToString();
         }
 
-        public string GetRemoteIpAddress()
+        public string? GetRemoteIpAddress()
         {
-            throw new NotImplementedException();
+            return _accessor.HttpContext?.Connection.RemoteIpAddress?.ToString();
         }
     }
 }

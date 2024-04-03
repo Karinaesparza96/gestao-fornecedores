@@ -12,6 +12,8 @@ namespace Dev.Api.Configuration
     {
         public static IServiceCollection ResolveDependencies(this IServiceCollection services)
         {   
+            services.AddScoped<IAppIdentityUser, IAppIdentityUser>();
+
             // Data
             services.AddScoped<MeuDbContext>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
