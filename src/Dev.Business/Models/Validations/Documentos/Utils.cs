@@ -6,7 +6,7 @@
         {
             var onlyNumber = "";
 
-            foreach(var s in valor)
+            foreach (var s in valor)
             {
                 if (char.IsDigit(s))
                 {

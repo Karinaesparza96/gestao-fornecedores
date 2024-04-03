@@ -1,7 +1,7 @@
 ﻿using Dev.Business.Models.Validations.Documentos;
 using FluentValidation;
 
-namespace Dev.Business.Models.Validation
+namespace Dev.Business.Models.Validations
 {
     public class FornecedorValidation : AbstractValidator<Fornecedor>
     {
@@ -10,7 +10,7 @@ namespace Dev.Business.Models.Validation
             RuleFor(f => f.Nome)
                 .NotEmpty()
                 .WithMessage("O campo {PropertyName} precisa ser fornecido.")
-                .Length(2,100)
+                .Length(2, 100)
                 .WithMessage("O campo {PropertyName} precisa ter entre {MinLength} e {MaxLength} caracteres.");
 
             When(f => f.TipoFornecedor == TipoFornecedor.PessoaFisica, () =>

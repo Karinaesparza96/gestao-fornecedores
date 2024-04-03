@@ -1,5 +1,4 @@
-﻿using Dev.Business.Interfaces;
-using Dev.Business.Models;
+﻿using Dev.Business.Models.Base;
 using Dev.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;

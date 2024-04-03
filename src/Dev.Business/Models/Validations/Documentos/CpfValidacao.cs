@@ -18,7 +18,7 @@
             return valor.Length == TamanhoCpf;
         }
 
-        private static bool TemDigitosRepetidos(string valor) 
+        private static bool TemDigitosRepetidos(string valor)
         {
             string[] invalidNumbers =
             {

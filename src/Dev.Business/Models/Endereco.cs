@@ -1,4 +1,6 @@
-﻿namespace Dev.Business.Models
+﻿using Dev.Business.Models.Base;
+
+namespace Dev.Business.Models
 {
     public class Endereco : Entity
     {   

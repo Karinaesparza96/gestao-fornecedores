@@ -1,5 +1,4 @@
-﻿
-namespace Dev.Business.Models
+﻿namespace Dev.Business.Models.Base
 {
     public abstract class Entity
     {

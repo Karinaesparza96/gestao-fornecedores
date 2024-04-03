@@ -1,7 +1,6 @@
-﻿using Dev.Business.Models;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
-namespace Dev.Business.Interfaces
+namespace Dev.Business.Models.Base
 {
     public interface IRepository<TEntity> : IDisposable where TEntity : Entity
     {

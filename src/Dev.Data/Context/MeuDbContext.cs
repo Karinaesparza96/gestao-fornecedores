@@ -1,4 +1,4 @@
-﻿using Dev.Business.Models;
+﻿using Dev.Business.Models.Base;
 using Dev.Data.Context.Configurations;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;

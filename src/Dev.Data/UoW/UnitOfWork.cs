@@ -1,4 +1,4 @@
-﻿using Dev.Business.Interfaces;
+﻿using Dev.Business.Models.Base;
 using Dev.Data.Context;
 
 namespace Dev.Data.UoW

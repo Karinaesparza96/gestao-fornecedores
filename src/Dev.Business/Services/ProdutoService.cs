@@ -1,5 +1,6 @@
 ﻿using Dev.Business.Interfaces;
 using Dev.Business.Models;
+using Dev.Business.Models.Base;
 using Dev.Business.Models.Validations;
 
 namespace Dev.Business.Services

@@ -1,4 +1,4 @@
-﻿namespace Dev.Business.Interfaces
+﻿namespace Dev.Business.Models.Base
 {
     public interface IUnitOfWork
     {

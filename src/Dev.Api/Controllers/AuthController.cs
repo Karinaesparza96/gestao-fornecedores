@@ -1,5 +1,6 @@
 ﻿using Dev.Business.Interfaces;
 using Dev.Business.Models;
+using Dev.Business.Models.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;

@@ -14,7 +14,7 @@ public class DigitoVerificador
     public DigitoVerificador ComMultiplicadoresDeAte(int primeiroMultiplicador, int ultimoMultiplicador)
     {
         _multiplicadores.Clear();
-        for(var i = primeiroMultiplicador; i <= ultimoMultiplicador; i++)
+        for (var i = primeiroMultiplicador; i <= ultimoMultiplicador; i++)
         {
             _multiplicadores.Add(i);
         }
@@ -24,7 +24,7 @@ public class DigitoVerificador
 
     public DigitoVerificador Substituindo(string substituto, params int[] digitos)
     {
-        foreach(var digito in digitos)
+        foreach (var digito in digitos)
         {
             _substituicoes[digito] = substituto;
         }
@@ -45,16 +45,16 @@ public class DigitoVerificador
     private string GetDigitSum()
     {
         var soma = 0;
-        for(int i = _numero.Length - 1, m = 0; i >= 0; i--)
+        for (int i = _numero.Length - 1, m = 0; i >= 0; i--)
         {
             var produto = (int)char.GetNumericValue(_numero[i]) * _multiplicadores[m];
             soma += produto;
 
-            if(++m >= _multiplicadores.Count) m = 0;
+            if (++m >= _multiplicadores.Count) m = 0;
 
         }
 
-        var mod = (soma % Modulo);
+        var mod = soma % Modulo;
         var resultado = _complementarDoModulo ? Modulo - mod : mod;
 
         return _substituicoes.ContainsKey(resultado) ? _substituicoes[resultado] : resultado.ToString();

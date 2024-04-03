@@ -1,4 +1,5 @@
 ﻿using Dev.Business.Interfaces;
+using Dev.Business.Models.Base;
 using Dev.Business.Noficacoes;
 using Dev.Business.Services;
 using Dev.Data.Context;
