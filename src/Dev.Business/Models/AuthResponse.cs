@@ -1,4 +1,4 @@
-﻿namespace Dev.Business.Models.Identity
+﻿namespace Dev.Business.Models
 {
     public class AuthResponse
     {

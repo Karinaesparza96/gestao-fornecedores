@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Dev.Business.Models.Base
+﻿namespace Dev.Business.Models.Base
 {
-    internal interface IAppIdentityUser
+    public interface IAppIdentityUser
     {
+        string GetUserName();
+        Guid GetUserId();
+        bool IsAuthenticated();
+        bool IsInRole(string role);
+        string GetRemoteIpAddress();
+        string GetLocalIpAddress();
     }
 }
