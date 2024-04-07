@@ -22,4 +22,5 @@ A aplicação fornece operações CRUD (Create, Read, Update, Delete) para geren
 - JWT (JSON Web Tokens)
 - Injeção de Dependências
 - Princípios SOLID (IUnitOfWork, Segregação de Interfaces)
+- Docker
 - Boas Práticas de Desenvolvimento
