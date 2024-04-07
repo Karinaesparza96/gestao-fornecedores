@@ -10,8 +10,7 @@ A aplicação fornece operações CRUD (Create, Read, Update, Delete) para geren
 
 - Registro e autenticação de usuários
 - Geração de tokens JWT para acesso seguro às rotas protegidas
-- CRUD para fornecedores, incluindo operações para listar, criar, atualizar e excluir fornecedores
-- CRUD para endereços de fornecedores, permitindo a associação de um endereço a um fornecedor
+- CRUD para fornecedores, incluindo operações para listar, criar, atualizar e excluir fornecedores e seu endereço. 
 - CRUD para produtos de fornecedores, permitindo a associação de múltiplos produtos a um fornecedor
 
 ## Tecnologias Utilizadas
