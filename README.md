@@ -29,7 +29,7 @@ A aplicação fornece operações CRUD (Create, Read, Update, Delete) para geren
 1. Clone o repositório para sua máquina local
 2. Abra o projeto em sua IDE de preferência (Visual Studio, Visual Studio Code, etc.)
 3. Certifique-se de ter o .NET Core SDK instalado em sua máquina
-4. Abra um terminal na raiz do projeto e execute o comando `dotnet run` para iniciar a aplicação
-5. Acesse a API através da URL fornecida e utilize um cliente REST (Postman, Insomnia, etc.) para fazer requisições HTTP
+4. Abra um terminal na raiz do projeto entre na pasta src/Dev.Api e execute o comando `dotnet run` para iniciar a aplicação
+5. Acesse a API através da URL fornecida ex: http://localhost:5197
 
 
