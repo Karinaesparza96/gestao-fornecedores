@@ -22,24 +22,14 @@ A aplicação fornece operações CRUD (Create, Read, Update, Delete) para geren
 - JWT (JSON Web Tokens)
 - Injeção de Dependências
 - Princípios SOLID (IUnitOfWork, Segregação de Interfaces)
-- Docker
 - Boas Práticas de Desenvolvimento
 
-## Como usar este projeto com Docker
+## Configuração e Uso
 
 1. Clone o repositório para sua máquina local
-2. Certifique-se de ter o Docker instalado em sua máquina. Você pode baixá-lo [aqui](https://www.docker.com/products/docker-desktop).
-3. Abra um terminal na raiz do projeto e execute o seguinte comando para construir a imagem Docker:
+2. Abra o projeto em sua IDE de preferência (Visual Studio, Visual Studio Code, etc.)
+3. Certifique-se de ter o .NET Core SDK instalado em sua máquina
+4. Abra um terminal na raiz do projeto e execute o comando `dotnet run` para iniciar a aplicação
+5. Acesse a API através da URL fornecida e utilize um cliente REST (Postman, Insomnia, etc.) para fazer requisições HTTP
 
-docker build -t dev-api .
-
-4. Após a construção da imagem, execute o seguinte comando para iniciar um contêiner Docker:
-
-docker run -d -p 8080:8080 -p 8081:8081 --name dev-api dev-api
-
-Isso iniciará o contêiner Docker com a aplicação em execução. Você pode acessar a API através da URL fornecida pelo Docker.
-
-## Configuração do Banco de Dados SQL Server
-
-Este projeto assume que você tem um banco de dados SQL Server configurado localmente. 
 
