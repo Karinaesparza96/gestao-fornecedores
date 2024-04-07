@@ -9,9 +9,6 @@ namespace Dev.Business.Models.Base
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly INotificador _notificador;
-
-        protected Guid UserId { get; set; }
-        protected string? UserName { get; set; }
         protected BaseService(INotificador notificador, IUnitOfWork unitOfWork)
         {
             _notificador = notificador;

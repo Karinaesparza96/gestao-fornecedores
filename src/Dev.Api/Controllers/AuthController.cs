@@ -1,5 +1,6 @@
 ﻿using Dev.Business.Interfaces;
 using Dev.Business.Models;
+using Dev.Business.Models.Base;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -18,9 +19,10 @@ namespace Dev.Api.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly JwtSettings _jwtSettings;
         public AuthController(INotificador notificador, 
-                        SignInManager<IdentityUser> signInManager,
-                        UserManager<IdentityUser> userManager, 
-                        IOptions<JwtSettings> jwtSettings) : base(notificador)
+                              SignInManager<IdentityUser> signInManager,
+                              UserManager<IdentityUser> userManager, 
+                              IOptions<JwtSettings> jwtSettings,
+                              IAppIdentityUser user) : base(notificador, user)
         {   
             _signInManager = signInManager;
             _userManager = userManager;
@@ -81,7 +83,8 @@ namespace Dev.Api.Controllers
 
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.UserName)
+                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(ClaimTypes.NameIdentifier, user.Id)
             };
 
             foreach (var role in roles)

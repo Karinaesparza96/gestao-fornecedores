@@ -1,4 +1,5 @@
-﻿using Dev.Business.Interfaces;
+﻿using Dev.Api.Extensions.IdentityUser;
+using Dev.Business.Interfaces;
 using Dev.Business.Models.Base;
 using Dev.Business.Noficacoes;
 using Dev.Business.Services;
@@ -12,7 +13,7 @@ namespace Dev.Api.Configuration
     {
         public static IServiceCollection ResolveDependencies(this IServiceCollection services)
         {   
-            services.AddScoped<IAppIdentityUser, IAppIdentityUser>();
+            services.AddScoped<IAppIdentityUser, AppIdentityUser>();
 
             // Data
             services.AddScoped<MeuDbContext>();

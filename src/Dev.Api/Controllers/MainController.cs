@@ -1,4 +1,5 @@
 using Dev.Business.Interfaces;
+using Dev.Business.Models.Base;
 using Dev.Business.Notification;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -10,9 +11,18 @@ namespace Dev.Api.Controllers
     public class MainController : ControllerBase
     {
         private readonly INotificador _notificador;
-        public MainController(INotificador notificador)
+        protected Guid UserId { get; set; }
+        protected string? UserName { get; set; }
+        public MainController(INotificador notificador,
+                              IAppIdentityUser user)
         {
             _notificador = notificador;
+
+            if (user.IsAuthenticated())
+            {
+                UserId = user.GetUserId();
+                UserName = user.GetUserName();
+            }
         }
 
         protected bool OperacaoValida()

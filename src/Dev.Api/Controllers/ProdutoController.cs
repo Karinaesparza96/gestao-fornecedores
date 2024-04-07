@@ -2,6 +2,7 @@
 using Dev.Api.ViewModels;
 using Dev.Business.Interfaces;
 using Dev.Business.Models;
+using Dev.Business.Models.Base;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -16,8 +17,8 @@ namespace Dev.Api.Controllers
         public ProdutoController(INotificador notificador,
                                  IProdutoService produtoService,
                                  IProdutoRepository produtoRepository,
-                                 IMapper mapper)
-                                : base(notificador)
+                                 IMapper mapper,
+                                 IAppIdentityUser user) : base(notificador, user)
         {
             _produtoService = produtoService;
             _produtoRepository = produtoRepository;

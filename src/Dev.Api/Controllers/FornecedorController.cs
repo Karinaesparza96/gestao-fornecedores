@@ -2,6 +2,7 @@
 using Dev.Api.DTOs;
 using Dev.Business.Interfaces;
 using Dev.Business.Models;
+using Dev.Business.Models.Base;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -18,7 +19,8 @@ namespace Dev.Api.Controllers
         public FornecedorController(INotificador notificador, 
                                     IFornecedorService fornecedorService, 
                                     IFornecedorRepository fornecedorRepository,
-                                    IMapper mapper) : base(notificador)
+                                    IMapper mapper,
+                                    IAppIdentityUser user) : base(notificador, user)
         {
             _fornecedorService = fornecedorService;
             _fornecedorRepository = fornecedorRepository;

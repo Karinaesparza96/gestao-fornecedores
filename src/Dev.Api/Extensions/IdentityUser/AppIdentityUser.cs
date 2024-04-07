@@ -3,6 +3,7 @@ using Microsoft.IdentityModel.JsonWebTokens;
 using System.Security.Claims;
 using IdentityModel;
 
+
 namespace Dev.Api.Extensions.IdentityUser
 {
     public class AppIdentityUser : IAppIdentityUser
@@ -15,14 +16,12 @@ namespace Dev.Api.Extensions.IdentityUser
         }
         public Guid GetUserId()
         {
-            if(!IsAuthenticated()) return Guid.Empty;
+            if (!IsAuthenticated()) return Guid.Empty;
 
             var claim = _accessor.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
             if (string.IsNullOrEmpty(claim))
-            {
-                claim = _accessor.HttpContext?.User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
-            }
+                claim = _accessor.HttpContext?.User?.FindFirst(JwtRegisteredClaimNames.NameId)?.Value;
 
             return claim is null ? Guid.Empty : Guid.Parse(claim);
         }
