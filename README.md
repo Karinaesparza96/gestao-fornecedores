@@ -2,7 +2,9 @@
   API REST em ASP.NET Core 
 </h1>
 <p align="center">
-Esta é uma aplicação web API REST desenvolvida em ASP.NET Core, seguindo boas práticas de arquitetura e design de software, incluindo os princípios SOLID. A aplicação está dividida em responsabilidades distintas para a API, serviços e acesso ao banco de dados. Utiliza Entity Framework Core para persistência de dados, Identity para autenticação e autorização, e JWT para fornecer tokens de acesso seguro.
+Esta é uma aplicação web API REST desenvolvida em ASP.NET Core.<br/>
+A aplicação está dividida em responsabilidades distintas para a API, serviços e acesso ao banco de dados. <br/>
+Utiliza Entity Framework Core para persistência de dados, Identity para autenticação e autorização, e JWT para fornecer tokens de acesso seguro.<br/>
 </p>
 
 ## 🔥 Funcionalidades 
