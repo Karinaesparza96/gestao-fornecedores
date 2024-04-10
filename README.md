@@ -39,7 +39,7 @@ A aplicação fornece operações CRUD (Create, Read, Update, Delete) para geren
 
 Para utilizar os endpoints protegidos pela autenticação JWT, siga estes passos:
 
-1. No Swagger UI, navegue para a rota de autenticação (geralmente `/auth/register` ou `/auth/login`)
+1. No Swagger UI, navegue para a rota de autenticação (`/auth/register` ou `/auth/login`)
 2. Registre ou faça login com suas credenciais
 3. Após o login bem-sucedido, copie o token JWT gerado
 4. Clique no botão "Authorize" no canto superior direito do Swagger UI
