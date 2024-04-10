@@ -14,13 +14,11 @@ A aplicação fornece operações CRUD (Create, Read, Update, Delete) para geren
 - CRUD para fornecedores, incluindo operações para listar, criar, atualizar e excluir fornecedores e seu endereço. 
 - CRUD para produtos de fornecedores, permitindo a associação de múltiplos produtos a um fornecedor
 
-## 🚀 Tecnologias
+## 🚀 Tecnologias Utilizadas
 
 - ASP.NET Core
 - Entity Framework Core
 - Identity
-- JWT (JSON Web Tokens)
-- Pattern IUnitOfWork
 - Docker 
 
 ## ✋🏻 Pré-requisitos
