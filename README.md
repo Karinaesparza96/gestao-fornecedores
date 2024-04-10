@@ -1,5 +1,5 @@
 <h1 align="center">
-  API RESTful ASP.NET Core
+  API RESTful ASP.NET Core 
 </h1>
 <p align="center">
 Esta é uma aplicação web API RESTful desenvolvida em ASP.NET Core, seguindo boas práticas de arquitetura e design de software, incluindo os princípios SOLID. A aplicação está dividida em responsabilidades distintas para a API, serviços e acesso ao banco de dados. Utiliza Entity Framework Core para persistência de dados, Identity para autenticação e autorização, e JWT para fornecer tokens de acesso seguro.
@@ -19,6 +19,7 @@ A aplicação fornece operações CRUD (Create, Read, Update, Delete) para geren
 - ASP.NET Core
 - Entity Framework Core
 - Identity
+- Sql Server
 - Docker 
 
 ## ✋🏻 Pré-requisitos
