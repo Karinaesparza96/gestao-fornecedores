@@ -4,7 +4,8 @@
 <p align="center">
 Esta é uma aplicação web API RESTful desenvolvida em ASP.NET Core, seguindo boas práticas de arquitetura e design de software, incluindo os princípios SOLID. A aplicação está dividida em responsabilidades distintas para a API, serviços e acesso ao banco de dados. Utiliza Entity Framework Core para persistência de dados, Identity para autenticação e autorização, e JWT para fornecer tokens de acesso seguro.
 </p>
-## Funcionalidades <i class="fa-duotone fa-sparkles"></i>
+
+## 🔥 Funcionalidades 
 
 A aplicação fornece operações CRUD (Create, Read, Update, Delete) para gerenciar fornecedores, seus endereços e produtos. As principais funcionalidades incluem:
 
@@ -25,7 +26,7 @@ A aplicação fornece operações CRUD (Create, Read, Update, Delete) para geren
 ## ✋🏻 Pré-requisitos
 - Docker 
   
-## Uso com Docker Compose f395
+## Uso com Docker Compose 
 
 1. Clone o repositório para sua máquina local
 2. Abra o projeto em sua IDE de preferência (Visual Studio, Visual Studio Code, etc.)
@@ -43,3 +44,5 @@ Para utilizar os endpoints protegidos pela autenticação JWT, siga estes passos
 4. Clique no botão "Authorize" no canto superior direito do Swagger UI
 5. Cole o token JWT na caixa de texto e clique em "Authorize"
 6. Agora você está autenticado e autorizado para acessar os recursos protegidos da API.
+
+Feito com 💖 by Karina Esparza 👋
