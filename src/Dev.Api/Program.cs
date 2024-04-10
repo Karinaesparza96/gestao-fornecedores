@@ -50,7 +50,7 @@ builder.Services.AddSwaggerGen(option =>
 
 builder.Services.AddDbContext<MeuDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DevDb"));
 });
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
