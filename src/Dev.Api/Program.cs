@@ -13,12 +13,6 @@ builder.Services.AddControllers()
                 {
                     options.SuppressModelStateInvalidFilter = true;
                 });
-
-builder.Services.AddControllers(options =>
-{
-    options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
-});
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(option =>
 {
