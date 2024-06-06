@@ -10,7 +10,7 @@ namespace Dev.Api.Configuration
         public AutoMapperConfiguration()
         {
             CreateMap<Fornecedor, FornecedorViewModel>();
-            CreateMap<FornecedorViewModel, Fornecedor>();
+            CreateMap<FornecedorViewModel, Fornecedor>().ForMember(dest => dest.Id, src => src.Ignore());
 
             CreateMap<Endereco, EnderecoViewModel>();
             CreateMap<EnderecoViewModel, Endereco>();
