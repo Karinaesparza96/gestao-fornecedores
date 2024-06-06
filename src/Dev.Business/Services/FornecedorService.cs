@@ -6,10 +6,10 @@ using Dev.Business.Models.Validations;
 namespace Dev.Business.Services
 {
     public class FornecedorService : BaseService, IFornecedorService
-    {   
+    {
         private readonly IFornecedorRepository _fornecedorRepository;
-        public FornecedorService(INotificador notificador, 
-                                IFornecedorRepository fornecedorRepository, 
+        public FornecedorService(INotificador notificador,
+                                IFornecedorRepository fornecedorRepository,
                                 IUnitOfWork unitOfWork) : base(notificador, unitOfWork)
         {
             _fornecedorRepository = fornecedorRepository;
@@ -17,7 +17,9 @@ namespace Dev.Business.Services
 
         public async Task Adicionar(Fornecedor fornecedor)
         {
-            if (!ExecutarValidacao(new FornecedorValidation(), fornecedor) || 
+            if (!ExecutarValidacao(new FornecedorValidation(), fornecedor)) return;
+
+            if (fornecedor.Endereco != null &&
                 !ExecutarValidacao(new EnderecoValidation(), fornecedor.Endereco)) return;
 
             var fornecedores = await _fornecedorRepository.Buscar(f => f.Documento == fornecedor.Documento);
@@ -25,13 +27,11 @@ namespace Dev.Business.Services
             if (fornecedores.Any())
             {
                 Notificar("Já existe um fornecedor com este documento informado.");
-
                 return;
             }
 
             _fornecedorRepository.Adicionar(fornecedor);
             await Commit();
-           
         }
 
         public async Task Atualizar(Fornecedor fornecedor)
@@ -40,13 +40,13 @@ namespace Dev.Business.Services
 
             var fornecedores = await _fornecedorRepository.Buscar(f => f.Documento == fornecedor.Documento && f.Id != fornecedor.Id);
 
-            if (fornecedores.Any()){
-
+            if (fornecedores.Any())
+            {
                 Notificar("Já existe um fornecedor com este documento informado.");
                 return;
             }
 
-             _fornecedorRepository.Atualizar(fornecedor);
+            _fornecedorRepository.Atualizar(fornecedor);
             await Commit();
         }
 
@@ -54,13 +54,13 @@ namespace Dev.Business.Services
         {
             var fornecedor = await _fornecedorRepository.ObterFornecedorProdutosEndereco(id);
 
-            if(fornecedor == null)
+            if (fornecedor == null)
             {
                 Notificar("Fornecedor não existe.");
                 return;
             }
 
-            if (fornecedor.Produtos?.Any() == true)
+            if (fornecedor.Produtos != null && fornecedor.Produtos.Any())
             {
                 Notificar("Fornecedor possui produtos cadastrados.");
                 return;
@@ -68,9 +68,9 @@ namespace Dev.Business.Services
 
             var endereco = await _fornecedorRepository.ObterEnderecoPorFornecedor(id);
 
-            if(endereco != null)
+            if (endereco != null)
             {
-               _fornecedorRepository.RemoverEnderecoFornecedor(endereco);
+                _fornecedorRepository.RemoverEnderecoFornecedor(endereco);
             }
 
             _fornecedorRepository.Remover(id);
