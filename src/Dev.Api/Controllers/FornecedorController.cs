@@ -56,7 +56,11 @@ namespace Dev.Api.Controllers
         {
             if (!ModelState.IsValid) return CustomResponse(ModelState);
 
-            await _fornecedorService.Adicionar(_mapper.Map<Fornecedor>(fornecedorViewModel));
+            var fornecedor = _mapper.Map<Fornecedor>(fornecedorViewModel);
+
+            await _fornecedorService.Adicionar(fornecedor);
+
+            fornecedorViewModel = _mapper.Map<FornecedorViewModel>(fornecedor);
 
            return CustomResponse(HttpStatusCode.Created, fornecedorViewModel);
         }
