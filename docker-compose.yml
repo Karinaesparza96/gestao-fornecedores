@@ -13,6 +13,8 @@ services:
     restart: always
     ports:
       - "8080:8080"
+    networks:
+      - backend
   sql:
     image: "mcr.microsoft.com/mssql/server:2022-latest"
     container_name: sql_server2022
@@ -23,7 +25,11 @@ services:
       SA_PASSWORD: Password123!
     volumes:
         - sql_data:/var/opt/mssql
-    
+    networks:
+      - backend
+networks:
+  backend:
+  
 volumes:
   sql_data:
     driver: local
