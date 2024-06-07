@@ -1,14 +1,16 @@
-version: '1.0'
+version: '3'
 services:
+
   web_api:
     image: web_api
     container_name: web_api_app
     build:
       context: .
       dockerfile: Dockerfile
-      target: migrations
+      target: final
     depends_on:
       - sql
+    restart: always
     ports:
       - "8080:8080"
   sql:
@@ -17,5 +19,11 @@ services:
     ports:
       - "1433:1433" 
     environment:
-      - ACCEPT_EULA=y
-      - SA_PASSWORD=A&VeryComplex123Password
+      ACCEPT_EULA: Y
+      SA_PASSWORD: Password123!
+    volumes:
+        - sql_data:/var/opt/mssql
+    
+volumes:
+  sql_data:
+    driver: local
